@@ -18,6 +18,8 @@ require_relative 'lib/memo.rb'
 puts "Привет я твой блокнот! "
 puts "Что хотите записать в блокнот?"
 
+# Post.crete_posts_table
+
 # массив возможных видов Записи (поста)
 choices = Post.post_types.keys
 choice = -1

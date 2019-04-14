@@ -1,7 +1,7 @@
 # Базовый класс "Запись"
 # Задает основные методы и свойства, присущие всем разновидностям Записи
 require 'sqlite3' #подключаем гем sqlite
-
+require 'pry'
 class Post
 
   # статическое поле класса или class variable
@@ -119,6 +119,22 @@ class Post
     file_name = @created_at.strftime("#{self.class.name}_%Y-%m-%d_%H-%M-%S.txt")
 
     return current_path + "/" + file_name
+  end
+
+  def self.crete_posts_table
+
+    db = SQLite3::Database.new(@@SQLITE_DB_FILE)
+
+    rows = db.execute <<-SQL
+          create table posts(
+           id int,
+           type varchar(30),
+           created_at date,
+           text text,
+           due_date date,
+           url varchar(30)
+         );
+        SQL
   end
 
   def save_to_db
